@@ -54,7 +54,7 @@ jobs:
         run: |
           mkdir build
           cp Marlin/.pio/build/mks_robin_nano_v1v2/Robin_nano35.bin build/robin_nano.bin
-          echo "$(git describe --tags)-$(git -C Marlin rev-parse --short HEAD)`" >> "$GITHUB_ENV"
+          echo "RELEASE_NAME=$(git describe --tags)-$(git -C Marlin rev-parse --short HEAD)" >> "$GITHUB_ENV"
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.1
         with:
@@ -68,3 +68,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: build/robin_nano.bin
+          name: ${{ env.RELEASE_NAME }}
