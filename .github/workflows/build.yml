@@ -40,6 +40,9 @@ jobs:
           pip install -U platformio
           pio upgrade --dev
           pio pkg update --global
+      - name: Copy config
+        run: |
+          cp -f config/* Marlin/Marlin/
       - name: Run pio
         run: |
           cd Marlin
