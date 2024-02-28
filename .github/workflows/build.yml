@@ -47,25 +47,20 @@ jobs:
         run: |
           cd Marlin
           pio run -e mks_robin_nano_v1v2
+      - name: Copy built firmware
+        run: |
+          mkdir build
+          cp Marlin/.pio/build/mks_robin_nano_v1v2/Robin_nano35.bin build/robin_nano.bin
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.1
         with:
           # Artifact name
           name: firmware
           # A file, directory or wildcard pattern that describes what to upload
-          path: Marlin/.pio/build/mks_robin_nano_v1v2/Robin_nano35.bin
+          path: build/robin_nano.bin
           # The desired behavior if no files are found using the provided path.
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+          files: build/robin_nano.bin
