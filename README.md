@@ -1,6 +1,7 @@
 # Marlin firmware for Kingroon KP3S 3.0
 ## Warning: this build is currently bugged
-Try https://github.com/mechano/Kingroon_KP3S_Marlin_Firmware \
+Try https://github.com/EmptySetRBLX/kp3s-marlin \
+or https://github.com/mechano/Kingroon_KP3S_Marlin_Firmware \
 More info: https://github.com/konradmb/kp3s-marlin/issues/1#issuecomment-2646622284
 
 ---
